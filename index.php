@@ -1,6 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    
+<div class="header">
+    <!-- Lägg till en div med klassen "connection-status" -->
+    <div class="connection-status">
+        <?php
+        // Deklarera variabeln $connection innan den används
+        $connection = getConnection();
+
+        // check connection
+        if ($connection->connect_error != null) {
+            echo "Anslutningen misslyckades: " . $connection->connect_error;
+        } else {
+            echo "Anslutningen lyckades.";
+        }
+        ?>
+    </div>
+</div>
+
 <?php
 
-echo '<link rel="stylesheet" type="text/css" href="style.css">';
+
+
 
 // skapa anslutning till databasen
 function getConnection(){
@@ -14,17 +39,16 @@ $password = "";
 $connection = new mysqli($host, $username, $password, $database, $port);
 return $connection;
 
-// control if connection succeded
-if ($connection->connect_error) {
-    die("Kunde inte ansluta till databasen: " . $connection->connect_error);
-}
+
 
 }
 
-// Funktion för att hämta vilka produkter en kund har köpt (baserat på kundens id).
+
+//---- Funktion för att hämta vilka produkter en kund har köpt (baserat på kundens id)----.
 function getProductsForCustomer($connection){
     $customer_id = 6; 
     $customer_name = "Sven Månsson"; 
+    $customerNameShown = false;
 
     // Hämta id (order-ID:er) för ordrar (i orders-tabellen) för specifika kunden
     $query12= "SELECT orders_id FROM orders WHERE customer_id = $customer_id;";
@@ -74,25 +98,25 @@ function getProductsForCustomer($connection){
                 $product_row = $product_result->fetch_assoc();
                 $product_name = $product_row['name'];
 
+                if (!$customerNameShown) {
+                    echo "<div class='show-order'>";
+                    echo "<h2>Produkter som är köpta av kunden: $customer_name.</h2>";
+                    $customerNameShown = true; // Markera att kundens namn har visats
+                }
+    
                 // Generera HTML för varje produkt
-                echo "<div class='show-order'>";
-                echo "<h2>Produkter som är köpta av kunden: $customer_name.</h2>";
                 echo "<h3>Produktnamn: $product_name</h3>";
                 echo "<h4>Antal: $quantity</h4>";
-                echo "</div>";
             }
         }
     }
 }
 }
 
-// skapa databas-anslutning
-$connection = getConnection();  
+  
 
 // Anropa funktionen med databasanslutningen
 getProductsForCustomer($connection);   
-
-
 
 
 // check connection
@@ -103,7 +127,11 @@ if($connection->connect_error != null){
 }
 
 
+
 // stäng anslutningen till databasen
 $connection->close();
     
 ?>
+
+</body>
+</html>

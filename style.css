@@ -1,9 +1,32 @@
+
+
+.header {
+    background-color: #577c86; /* Bakgrundsfärg för header */
+    color: #fff; /* Textfärg för header */
+    padding: 5rem; /* Inre utfyllnad för header */
+}
+
+.connection-status {
+    position: absolute;
+    top: 3rem; /* vertikal position */
+    left: 3rem; /* horisontell position */
+    background-color: rgb(152, 205, 202);
+    color: black;
+    padding: 2rem;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold; /* Fetstil text */
+    margin-bottom: 1rem; /* Avstånd under connection-status */
+}
+
+
+
+
 .show-order {
-    background-color: #92a7d0;
+    background-color: #9ea9c0;
     padding: 20px;
     border-radius: 10px;
-    border-style: dotted;
-    border-color: rgb(34, 66, 66);
+    border-style: none;
     width: 25rem;
   }
   
@@ -11,16 +34,19 @@ h2 {
     color: #0e0f1c;
     font-size: 24px;
     margin-bottom: 10px;
-  }
+}
   
 h3 {
     color: rgb(19, 2, 2);
     font-size: 20px;
     margin-bottom: 8px;
-  }
+}
   
 h4 {
     color: #180404;
     font-size: 20px;
     margin-bottom: 6px;
-  }
+}
+
+
+
